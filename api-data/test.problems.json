@@ -459,4 +459,18 @@
   "quickNote": "Implementation",
   "solution": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    long long v=0, p=0;\n    cin >> n;\n    vector<int> a(n+1), b(n+1);\n    for (int i = 1; i <= n; i++) {\n        int x;\n        cin >> x;\n        a[x] = i;\n        b[x] = n - i + 1;\n    }\n    cin >> m;\n    while(m--) {\n        int x;\n        cin >> x;\n        v += a[x];\n        p += b[x];\n    }\n    cout<<v<<\" \"<<p;\n    return 0;\n}",
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664df3f04f532a089c411d68"
+  },
+  "problemNumber": "217",
+  "problemName": "Contains Duplicate",
+  "solvedDate": "2024-05-22",
+  "platformName": "Leetcode",
+  "problemLink": "https://leetcode.com/problems/contains-duplicate/description/",
+  "problemStatement": "Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.\nExample 1:\n\nInput: nums = [1,2,3,1]\nOutput: true\nExample 2:\n\nInput: nums = [1,2,3,4]\nOutput: false\nExample 3:\n\nInput: nums = [1,1,1,3,3,4,3,2,4,2]\nOutput: true",
+  "quickNote": "Arrays, Hash Set",
+  "solution": "class Solution {\npublic:\n    bool containsDuplicate(vector<int>& nums) {\n        unordered_set<int> seen;\n        for (int num : nums) {\n            if (seen.count(num) > 0)\n                return true;\n            seen.insert(num);\n        }\n        return false;\n    }\n};",
+  "__v": 0
 }]
