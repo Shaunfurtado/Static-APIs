@@ -473,4 +473,32 @@
   "quickNote": "Arrays, Hash Set",
   "solution": "class Solution {\npublic:\n    bool containsDuplicate(vector<int>& nums) {\n        unordered_set<int> seen;\n        for (int num : nums) {\n            if (seen.count(num) > 0)\n                return true;\n            seen.insert(num);\n        }\n        return false;\n    }\n};",
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6658b31ab5db54a88d008ed5"
+  },
+  "problemNumber": "242",
+  "problemName": "Valid Anagram",
+  "solvedDate": "2024-05-22",
+  "platformName": "Leetcode",
+  "problemLink": "https://leetcode.com/problems/valid-anagram/description/",
+  "problemStatement": "Given two strings s and t, return true if t is an anagram of s, and false otherwise.\n\nAn Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.\n\n \n\nExample 1:\n\nInput: s = \"anagram\", t = \"nagaram\"\nOutput: true\nExample 2:\n\nInput: s = \"rat\", t = \"car\"\nOutput: false\n \n\nConstraints:\n\n1 <= s.length, t.length <= 5 * 104\ns and t consist of lowercase English letters.",
+  "quickNote": "String, Sorting, Hash Table",
+  "solution": "class Solution {\npublic:\n    bool isAnagram(string s, string t) {\n        sort(s.begin(),s.end());\n        sort(t.begin(),t.end());\n        return s==t;\n    }\n};",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6658b352b5db54a88d008ed7"
+  },
+  "problemNumber": "1",
+  "problemName": "Two Sum",
+  "solvedDate": "2024-05-22",
+  "platformName": "",
+  "problemLink": "https://leetcode.com/problems/two-sum/description/",
+  "problemStatement": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.\n\n \n\nExample 1:\n\nInput: nums = [2,7,11,15], target = 9\nOutput: [0,1]\nExplanation: Because nums[0] + nums[1] == 9, we return [0, 1].\nExample 2:\n\nInput: nums = [3,2,4], target = 6\nOutput: [1,2]\nExample 3:\n\nInput: nums = [3,3], target = 6\nOutput: [0,1]\n \n\nConstraints:\n\n2 <= nums.length <= 104\n-109 <= nums[i] <= 109\n-109 <= target <= 109\nOnly one valid answer exists.",
+  "quickNote": "Array, Hash Table",
+  "solution": "class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        int n = nums.size();\n        for (int i=0; i<n-1; i++){\n            for( int j=i+1; j<n; j++){\n                if(nums[i]+nums[j]==target){\n                    return {i,j};\n                }\n            }\n        }\n        return {};\n    }\n};",
+  "__v": 0
 }]
