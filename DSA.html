@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DSA.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="c-data-structures-and-algorithms-cheat-sheet">C++ Data Structures and Algorithms Cheat Sheet</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#c-data-structures-and-algorithms-cheat-sheet">C++ Data Structures and Algorithms Cheat Sheet</a>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#10-data-structures">1.0 Data Structures</a>
+<ul>
+<li><a href="#11-vector-stdvector">1.1 Vector <code>std::vector</code></a></li>
+<li><a href="#12-deque-stddeque">1.2 Deque <code>std::deque</code></a></li>
+<li><a href="#13-list-stdlist-and-stdforward_list">1.3 List <code>std::list</code> and <code>std::forward_list</code></a></li>
+<li><a href="#14-map-stdmap-and-stdunordered_map">1.4 Map <code>std::map</code> and <code>std::unordered_map</code></a></li>
+<li><a href="#15-set-stdset">1.5 Set <code>std::set</code></a></li>
+<li><a href="#16-stack-stdstack">1.6 Stack <code>std::stack</code></a></li>
+<li><a href="#17-queue-stdqueue">1.7 Queue <code>std::queue</code></a></li>
+<li><a href="#18-priority-queue-stdpriority_queue">1.8 Priority Queue <code>std::priority_queue</code></a></li>
+<li><a href="#19-heap-stdpriority_queue">1.9 Heap <code>std::priority_queue</code></a></li>
+</ul>
+</li>
+<li><a href="#20-trees">2.0 Trees</a>
+<ul>
+<li><a href="#21-binary-tree">2.1 Binary Tree</a></li>
+<li><a href="#22-balanced-trees">2.2 Balanced Trees</a></li>
+<li><a href="#23-binary-search">2.3 Binary Search</a></li>
+<li><a href="#24-depth-first-search">2.4 Depth-First Search</a></li>
+<li><a href="#25-breadth-first-search">2.5 Breadth-First Search</a></li>
+</ul>
+</li>
+<li><a href="#30-np-complete-problems">3.0 NP Complete Problems</a>
+<ul>
+<li><a href="#31-np-complete">3.1 NP Complete</a></li>
+<li><a href="#32-traveling-salesman-problem">3.2 Traveling Salesman Problem</a></li>
+<li><a href="#33-knapsack-problem">3.3 Knapsack Problem</a></li>
+</ul>
+</li>
+<li><a href="#40-algorithms">4.0 Algorithms</a>
+<ul>
+<li><a href="#41-insertion-sort">4.1 Insertion Sort</a></li>
+<li><a href="#42-selection-sort">4.2 Selection Sort</a></li>
+<li><a href="#43-bubble-sort">4.3 Bubble Sort</a></li>
+<li><a href="#44-merge-sort">4.4 Merge Sort</a></li>
+<li><a href="#45-quicksort">4.5 Quicksort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-data-structures">1.0 Data Structures</h2>
+<h3 id="11-vector-stdvector">1.1 Vector <code>std::vector</code></h3>
+<p><strong>Use for:</strong> Simple storage, quick lookups by index.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Head</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Insert Tail</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Access by Index</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove Head</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Remove Tail</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
+v.push_back(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert Tail</span>
+<span class="hljs-keyword">int</span> head = v.front(); <span class="hljs-comment">// Access Head</span>
+v.pop_back(); <span class="hljs-comment">// Remove Tail</span>
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : v) <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="12-deque-stddeque">1.2 Deque <code>std::deque</code></h3>
+<p><strong>Use for:</strong> Similar to <code>vector</code> but allows efficient insertion and removal at both ends.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Head</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Insert Tail</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Access by Index</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove Head</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove Tail</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;deque&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">deque</span>&lt;<span class="hljs-keyword">int</span>&gt; d;
+d.push_front(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert Head</span>
+d.push_back(<span class="hljs-number">20</span>); <span class="hljs-comment">// Insert Tail</span>
+<span class="hljs-keyword">int</span> head = d.front(); <span class="hljs-comment">// Access Head</span>
+d.pop_front(); <span class="hljs-comment">// Remove Head</span>
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : d) <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="13-list-stdlist-and-stdforwardlist">1.3 List <code>std::list</code> and <code>std::forward_list</code></h3>
+<p><strong>Use for:</strong> Efficient insertion and deletion from the middle.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Head</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Insert Tail</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Access by Index</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Remove Head</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove Tail</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;list&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">list</span>&lt;<span class="hljs-keyword">int</span>&gt; l;
+l.push_front(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert Head</span>
+l.push_back(<span class="hljs-number">20</span>); <span class="hljs-comment">// Insert Tail</span>
+<span class="hljs-keyword">int</span> head = l.front(); <span class="hljs-comment">// Access Head</span>
+l.pop_front(); <span class="hljs-comment">// Remove Head</span>
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : l) <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="14-map-stdmap-and-stdunorderedmap">1.4 Map <code>std::map</code> and <code>std::unordered_map</code></h3>
+<p><strong>Use for:</strong> Key-value pairs, constant time lookups.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th><code>std::map</code></th>
+<th><code>std::unordered_map</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>O(log(n))</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Access by Key</td>
+<td>O(log(n))</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove by Key</td>
+<td>O(log(n))</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; m;
+m[<span class="hljs-string">"key"</span>] = <span class="hljs-number">10</span>; <span class="hljs-comment">// Insert</span>
+<span class="hljs-keyword">int</span> value = m[<span class="hljs-string">"key"</span>]; <span class="hljs-comment">// Access by Key</span>
+m.erase(<span class="hljs-string">"key"</span>); <span class="hljs-comment">// Remove by Key</span>
+
+<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; um;
+um[<span class="hljs-string">"key"</span>] = <span class="hljs-number">10</span>; <span class="hljs-comment">// Insert</span>
+value = um[<span class="hljs-string">"key"</span>]; <span class="hljs-comment">// Access by Key</span>
+um.erase(<span class="hljs-string">"key"</span>); <span class="hljs-comment">// Remove by Key</span>
+</div></code></pre>
+<h3 id="15-set-stdset">1.5 Set <code>std::set</code></h3>
+<p><strong>Use for:</strong> Removing duplicates, ordered storage.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>Find</td>
+<td>O(log(n))</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;
+s.insert(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert</span>
+<span class="hljs-keyword">bool</span> exists = (s.find(<span class="hljs-number">10</span>) != s.end()); <span class="hljs-comment">// Find</span>
+s.erase(<span class="hljs-number">10</span>); <span class="hljs-comment">// Remove</span>
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : s) <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="16-stack-stdstack">1.6 Stack <code>std::stack</code></h3>
+<p><strong>Use for:</strong> Last-In First-Out operations.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Pop</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Top</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; s;
+s.push(<span class="hljs-number">10</span>); <span class="hljs-comment">// Push</span>
+<span class="hljs-keyword">int</span> top = s.top(); <span class="hljs-comment">// Top</span>
+s.pop(); <span class="hljs-comment">// Pop</span>
+
+<span class="hljs-built_in">cout</span> &lt;&lt; top &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="17-queue-stdqueue">1.7 Queue <code>std::queue</code></h3>
+<p><strong>Use for:</strong> First-In First-Out operations.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Pop</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Front</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;
+q.push(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert</span>
+<span class="hljs-keyword">int</span> head = q.front(); <span class="hljs-comment">// Access Head</span>
+q.pop(); <span class="hljs-comment">// Remove Head</span>
+
+<span class="hljs-built_in">cout</span> &lt;&lt; head &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="18-priority-queue-stdpriorityqueue">1.8 Priority Queue <code>std::priority_queue</code></h3>
+<p><strong>Use for:</strong> First-In First-Out with priority overriding arrival time.</p>
+<p><strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>Pop</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>Top</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+priority_queue&lt;<span class="hljs-keyword">int</span>&gt; p;
+p.push(<span class="hljs-number">10</span>); <span class="hljs-comment">// Insert</span>
+<span class="hljs-keyword">int</span> top = p.top(); <span class="hljs-comment">// Access Top</span>
+p.pop(); <span class="hljs-comment">// Remove Top</span>
+
+<span class="hljs-built_in">cout</span> &lt;&lt; top &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="19-heap-stdpriorityqueue">1.9 Heap <code>std::priority_queue</code></h3>
+<p><strong>Notes:</strong> A heap is an instance of a priority queue.</p>
+<h2 id="20-trees">2.0 Trees</h2>
+<h3 id="21-binary-tree">2.1 Binary Tree</h3>
+<p><strong>Use for:</strong> Ordered maps, sets, heaps, binary search trees.</p>
+<h3 id="22-balanced-trees">2.2 Balanced Trees</h3>
+<p><strong>Use for:</strong> Ensure <code>O(log(n))</code> operations. Examples: AVL Trees, Red-Black Trees.</p>
+<h3 id="23-binary-search">2.3 Binary Search</h3>
+<p><strong>Use for:</strong> Efficiently finding an element in a sorted array or tree.</p>
+<h3 id="24-depth-first-search">2.4 Depth-First Search</h3>
+<p><strong>Use for:</strong> Traversing or searching tree or graph structures.</p>
+<h3 id="25-breadth-first-search">2.5 Breadth-First Search</h3>
+<p><strong>Use for:</strong> Traversing or searching tree or graph structures.</p>
+<h2 id="30-np-complete-problems">3.0 NP Complete Problems</h2>
+<h3 id="31-np-complete">3.1 NP Complete</h3>
+<p><strong>Definition:</strong> Problems that can be verified in polynomial time but not necessarily solved in polynomial time.</p>
+<h3 id="32-traveling-salesman-problem">3.2 Traveling Salesman Problem</h3>
+<p><strong>Definition:</strong> Find the shortest possible route visiting each city exactly once and returning to the origin city.</p>
+<h3 id="33-knapsack-problem">3.3 Knapsack Problem</h3>
+<p><strong>Definition:</strong> Maximize the total value in the knapsack without exceeding the weight limit.</p>
+<h2 id="40-algorithms">4.0 Algorithms</h2>
+<h3 id="41-insertion-sort">4.1 Insertion Sort</h3>
+<p><strong>Idea:</strong> Insert elements into their correct position in a sorted array.
+<strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Best</th>
+<th>Average</th>
+<th>Worst</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(n)</td>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertionSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr)</span> </span>{
+    <span class="hljs-keyword">int</span> n = arr.size();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) {
+        <span class="hljs-keyword">int</span> key = arr[i];
+        <span class="hljs-keyword">int</span> j = i - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (j &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[j] &gt; key) {
+            arr[j + <span class="hljs-number">1</span>] = arr[j];
+            --j;
+        }
+        arr[j + <span class="hljs-number">1</span>] = key;
+    }
+}
+</div></code></pre>
+<h3 id="42-selection-sort">4.2 Selection Sort</h3>
+<p><strong>Idea:</strong> Select the minimum element from the unsorted part and swap it with the leftmost unsorted element.
+<strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Best</th>
+<th>Average</th>
+<th>Worst</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">selectionSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr)</span> </span>{
+    <span class="hljs-keyword">int</span> n = arr.size();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; ++i) {
+        <span class="hljs-keyword">int</span> min_idx = i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; ++j)
+            <span class="hljs-keyword">if</span> (arr[j] &lt; arr[min_idx])
+                min_idx = j;
+        swap(arr[min_idx], arr[i]);
+    }
+}
+</div></code></pre>
+<h3 id="43-bubble-sort">4.3 Bubble Sort</h3>
+<p><strong>Idea:</strong> Repeatedly swap adjacent elements that are out of order.
+<strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Best</th>
+<th>Average</th>
+<th>Worst</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(n)</td>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr)</span> </span>{
+    <span class="hljs-keyword">int</span> n = arr.size();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; ++i)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n - i - <span class="hljs-number">1</span>; ++j)
+            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>])
+                swap(arr[j], arr[j + <span class="hljs-number">1</span>]);
+}
+</div></code></pre>
+<h3 id="44-merge-sort">4.4 Merge Sort</h3>
+<p><strong>Idea:</strong> Divide the array into halves, sort each half, and merge them back together.
+<strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Best</th>
+<th>Average</th>
+<th>Worst</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> r)</span> </span>{
+    <span class="hljs-keyword">int</span> n1 = m - l + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> n2 = r - m;
+
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">L</span><span class="hljs-params">(n1)</span>, <span class="hljs-title">R</span><span class="hljs-params">(n2)</span></span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n1; ++i)
+        L[i] = arr[l + i];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n2; ++i)
+        R[i] = arr[m + <span class="hljs-number">1</span> + i];
+
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = l;
+    <span class="hljs-keyword">while</span> (i &lt; n1 &amp;&amp; j &lt; n2) {
+        <span class="hljs-keyword">if</span> (L[i] &lt;= R[j])
+            arr[k++] = L[i++];
+        <span class="hljs-keyword">else</span>
+            arr[k++] = R[j++];
+    }
+    <span class="hljs-keyword">while</span> (i &lt; n1)
+        arr[k++] = L[i++];
+    <span class="hljs-keyword">while</span> (j &lt; n2)
+        arr[k++] = R[j++];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>{
+    <span class="hljs-keyword">if</span> (l &gt;= r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> m = l + (r - l) / <span class="hljs-number">2</span>;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + <span class="hljs-number">1</span>, r);
+    merge(arr, l, m, r);
+}
+</div></code></pre>
+<h3 id="45-quicksort">4.5 Quicksort</h3>
+<p><strong>Idea:</strong> Partition the array into elements less than and greater than a pivot, then sort each part.
+<strong>Time Complexity:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Best</th>
+<th>Average</th>
+<th>Worst</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n^2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Code:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>{
+    <span class="hljs-keyword">int</span> pivot = arr[high];
+    <span class="hljs-keyword">int</span> i = (low - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = low; j &lt;= high - <span class="hljs-number">1</span>; ++j) {
+        <span class="hljs-keyword">if</span> (arr[j] &lt; pivot) {
+            ++i;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + <span class="hljs-number">1</span>], arr[high]);
+    <span class="hljs-keyword">return</span> (i + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>{
+    <span class="hljs-keyword">if</span> (low &lt; high) {
+        <span class="hljs-keyword">int</span> pi = partition(arr, low, high);
+        quickSort(arr, low, pi - <span class="hljs-number">1</span>);
+        quickSort(arr, pi + <span class="hljs-number">1</span>, high);
+    }
+}
+</div></code></pre>
+<hr>
+<p>This cheat sheet covers the basic data structures and algorithms in C++. Each section includes the purpose, time complexity, and example code for the data structures and algorithms mentioned.</p>
+<h2 id="based-on-neetcode-150">Based on Neetcode 150</h2>
+<h3 id="1-arrays--hashing">1. Arrays &amp; Hashing</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Arrays:</strong> Store elements in a contiguous memory location.</li>
+<li><strong>Hashing:</strong> Use hash tables (unordered_map in C++) for fast lookup.</li>
+</ul>
+<p><strong>Problem: Two Sum</strong></p>
+<ul>
+<li><strong>Background:</strong> Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</li>
+<li><strong>Approach:</strong> Use a hash map (unordered_map in C++) to store each element's index as we iterate through the array. Check if the complement (target - current number) exists in the map.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>{
+    <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; <span class="hljs-built_in">map</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) {
+        <span class="hljs-keyword">int</span> complement = target - nums[i];
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">map</span>.find(complement) != <span class="hljs-built_in">map</span>.end()) {
+            <span class="hljs-keyword">return</span> {<span class="hljs-built_in">map</span>[complement], i};
+        }
+        <span class="hljs-built_in">map</span>[nums[i]] = i;
+    }
+    <span class="hljs-keyword">return</span> {};
+}
+</div></code></pre>
+<h3 id="2-two-pointers">2. Two Pointers</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Two Pointers:</strong> Use two indices to solve problems involving arrays or strings, often for finding pairs or subarrays.</li>
+</ul>
+<p><strong>Example: Valid Palindrome</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cctype&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>{
+    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = s.size() - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (left &lt; right) {
+        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; !<span class="hljs-built_in">isalnum</span>(s[left])) left++;
+        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; !<span class="hljs-built_in">isalnum</span>(s[right])) right--;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">tolower</span>(s[left]) != <span class="hljs-built_in">tolower</span>(s[right])) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        left++;
+        right--;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</div></code></pre>
+<p><strong>Problem: Container With Most Water</strong></p>
+<ul>
+<li><strong>Background:</strong> Given n non-negative integers <code>height</code> where each represents a point at coordinate (i, height[i]), n vertical lines are drawn such that the two endpoints of the line i is at (i, height[i]) and (i, 0). Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.</li>
+<li><strong>Approach:</strong> Use two pointers technique to maximize the area between two lines.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxArea</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; height)</span> </span>{
+    <span class="hljs-keyword">int</span> maxArea = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = height.size() - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (left &lt; right) {
+        <span class="hljs-keyword">int</span> minHeight = min(height[left], height[right]);
+        maxArea = max(maxArea, minHeight * (right - left));
+        <span class="hljs-keyword">if</span> (height[left] &lt; height[right]) {
+            left++;
+        } <span class="hljs-keyword">else</span> {
+            right--;
+        }
+    }
+    <span class="hljs-keyword">return</span> maxArea;
+}
+</div></code></pre>
+<h3 id="3-sliding-window">3. Sliding Window</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Sliding Window:</strong> Maintain a window over a subset of the data, adjusting its size or moving it as needed.</li>
+</ul>
+<p><strong>Example: Maximum Sum Subarray of Size K</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSumSubarray</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>{
+    <span class="hljs-keyword">int</span> windowSum = <span class="hljs-number">0</span>, maxSum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) windowSum += nums[i];
+    maxSum = windowSum;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = k; i &lt; nums.size(); i++) {
+        windowSum += nums[i] - nums[i - k];
+        maxSum = max(maxSum, windowSum);
+    }
+    <span class="hljs-keyword">return</span> maxSum;
+}
+</div></code></pre>
+<p><strong>Problem: Minimum Size Subarray Sum</strong></p>
+<ul>
+<li><strong>Background:</strong> Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. If there isn't one, return 0 instead.</li>
+<li><strong>Approach:</strong> Use a sliding window technique to find the smallest subarray that meets the condition.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, sum = <span class="hljs-number">0</span>, minLength = INT_MAX;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> right = <span class="hljs-number">0</span>; right &lt; nums.size(); right++) {
+        sum += nums[right];
+        <span class="hljs-keyword">while</span> (sum &gt;= s) {
+            minLength = min(minLength, right - left + <span class="hljs-number">1</span>);
+            sum -= nums[left++];
+        }
+    }
+    <span class="hljs-keyword">return</span> minLength == INT_MAX ? <span class="hljs-number">0</span> : minLength;
+}
+</div></code></pre>
+<h3 id="4-stack">4. Stack</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Stack:</strong> Last In First Out (LIFO) data structure.</li>
+</ul>
+<p><strong>Example: Valid Parentheses</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>{
+    <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">char</span>&gt; stk;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s) {
+        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">'('</span> || c == <span class="hljs-string">'{'</span> || c == <span class="hljs-string">'['</span>) {
+            stk.push(c);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (stk.empty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">char</span> top = stk.top();
+            <span class="hljs-keyword">if</span> ((c == <span class="hljs-string">')'</span> &amp;&amp; top != <span class="hljs-string">'('</span>) || (c == <span class="hljs-string">'}'</span> &amp;&amp; top != <span class="hljs-string">'{'</span>) || (c == <span class="hljs-string">']'</span> &amp;&amp; top != <span class="hljs-string">'['</span>)) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+            stk.pop();
+        }
+    }
+    <span class="hljs-keyword">return</span> stk.empty();
+}
+</div></code></pre>
+<p><strong>Problem: Evaluate Reverse Polish Notation</strong></p>
+<ul>
+<li><strong>Background:</strong> Evaluate the value of an arithmetic expression in Reverse Polish Notation (postfix notation).</li>
+<li><strong>Approach:</strong> Use a stack to push operands and pop them for operations.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">evalRPN</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; tokens)</span> </span>{
+    <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; s;
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">string</span>&amp; token : tokens) {
+        <span class="hljs-keyword">if</span> (token == <span class="hljs-string">"+"</span> || token == <span class="hljs-string">"-"</span> || token == <span class="hljs-string">"*"</span> || token == <span class="hljs-string">"/"</span>) {
+            <span class="hljs-keyword">int</span> b = s.top();
+            s.pop();
+            <span class="hljs-keyword">int</span> a = s.top();
+            s.pop();
+            <span class="hljs-keyword">if</span> (token == <span class="hljs-string">"+"</span>) s.push(a + b);
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (token == <span class="hljs-string">"-"</span>) s.push(a - b);
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (token == <span class="hljs-string">"*"</span>) s.push(a * b);
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (token == <span class="hljs-string">"/"</span>) s.push(a / b);
+        } <span class="hljs-keyword">else</span> {
+            s.push(stoi(token));
+        }
+    }
+    <span class="hljs-keyword">return</span> s.top();
+}
+</div></code></pre>
+<h3 id="5-binary-search">5. Binary Search</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Binary Search:</strong> Efficiently find elements in sorted arrays.</li>
+</ul>
+<p><strong>Example: Binary Search</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">binarySearch</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>{
+    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = nums.size() - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (left &lt;= right) {
+        <span class="hljs-keyword">int</span> mid = left + (right - left) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span> (nums[mid] == target) <span class="hljs-keyword">return</span> mid;
+        <span class="hljs-keyword">if</span> (nums[mid] &lt; target) left = mid + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span> right = mid - <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</div></code></pre>
+<p><strong>Problem: Search in Rotated Sorted Array</strong></p>
+<ul>
+<li><strong>Background:</strong> Suppose an array of length n sorted in ascending order is rotated at some pivot unknown to you beforehand. You are given a target value to search. If found in the array return its index, otherwise return -1.</li>
+<li><strong>Approach:</strong> Use binary search to find the target element in the rotated sorted array.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>{
+    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = nums.size() - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (left &lt;= right) {
+        <span class="hljs-keyword">int</span> mid = left + (right - left) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span> (nums[mid] == target) <span class="hljs-keyword">return</span> mid;
+        <span class="hljs-keyword">if</span> (nums[left] &lt;= nums[mid]) {  <span class="hljs-comment">// Left side is sorted</span>
+            <span class="hljs-keyword">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid]) {
+                right = mid - <span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                left = mid + <span class="hljs-number">1</span>;
+            }
+        } <span class="hljs-keyword">else</span> {  <span class="hljs-comment">// Right side is sorted</span>
+            <span class="hljs-keyword">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right]) {
+                left = mid + <span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                right = mid - <span class="hljs-number">1</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</div></code></pre>
+<h3 id="6-linked-list">6. Linked List</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Linked List:</strong> Sequence of nodes where each node points to the next node.</li>
+</ul>
+<p><strong>Example: Reverse Linked List</strong></p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ListNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    ListNode* next;
+    ListNode(<span class="hljs-keyword">int</span> x) : val(x), next(<span class="hljs-literal">nullptr</span>) {}
+};
+
+<span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{
+    ListNode* prev = <span class="hljs-literal">nullptr</span>;
+    ListNode* curr = head;
+    <span class="hljs-keyword">while</span> (curr) {
+        ListNode* next = curr-&gt;next;
+        curr-&gt;next = prev;
+        prev = curr;
+        curr = next;
+    }
+    <span class="hljs-keyword">return</span> prev;
+}
+</div></code></pre>
+<p><strong>Problem: Merge Two Sorted Lists</strong></p>
+<ul>
+<li><strong>Background:</strong> Merge two sorted linked lists and return it as a sorted list.</li>
+<li><strong>Approach:</strong> Use a dummy node and iterate through both lists, appending the smaller current node to the merged list.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ListNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    ListNode *next;
+    ListNode(<span class="hljs-keyword">int</span> x) : val(x), next(<span class="hljs-literal">nullptr</span>) {}
+};
+
+<span class="hljs-function">ListNode* <span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode* l1, ListNode* l2)</span> </span>{
+    ListNode* dummy = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);
+    ListNode* current = dummy;
+    <span class="hljs-keyword">while</span> (l1 &amp;&amp; l2) {
+        <span class="hljs-keyword">if</span> (l1-&gt;val &lt; l2-&gt;val) {
+            current-&gt;next = l1;
+            l1 = l1-&gt;next;
+        } <span class="hljs-keyword">else</span> {
+            current-&gt;next = l2;
+            l2 = l2-&gt;next;
+        }
+        current = current-&gt;next;
+    }
+    current-&gt;next = l1 ? l1 : l2;
+    <span class="hljs-keyword">return</span> dummy-&gt;next;
+}
+</div></code></pre>
+<h3 id="7-trees">7. Trees</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Trees:</strong> Hierarchical data structures with nodes connected by edges.</li>
+<li><strong>Binary Trees, Binary Search Trees:</strong> Special kinds of trees.</li>
+</ul>
+<p><strong>Example: Binary Tree Inorder Traversal</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">nullptr</span>), right(<span class="hljs-literal">nullptr</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; result)</span> </span>{
+    <span class="hljs-keyword">if</span> (root) {
+        inorderTraversal(root-&gt;left, result);
+        result.push_back(root-&gt;val);
+        inorderTraversal(root-&gt;right, result);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; result;
+    inorderTraversal(root, result);
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<p><strong>Problem: Binary Tree Maximum Path Sum</strong></p>
+<ul>
+<li><strong>Background:</strong> Given a non-empty binary tree, find the maximum path sum. For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections.</li>
+<li><strong>Approach:</strong> Use recursion to calculate the maximum path sum for each subtree and update the maximum sum found so far.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">nullptr</span>), right(<span class="hljs-literal">nullptr</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxPathSum</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-keyword">int</span> maxSum = INT_MIN;
+    maxPathSumHelper(root, maxSum);
+    <span class="hljs-keyword">return</span> maxSum;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxPathSumHelper</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span>&amp; maxSum)</span> </span>{
+    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> leftSum = max(<span class="hljs-number">0</span>, maxPathSumHelper(root-&gt;left, maxSum));
+    <span class="hljs-keyword">int</span> rightSum = max(<span class="hljs-number">0</span>, maxPathSumHelper(root-&gt;right, maxSum));
+    maxSum = max(maxSum, leftSum + rightSum + root-&gt;val);
+    <span class="hljs-keyword">return</span> max(leftSum, rightSum) + root-&gt;val;
+}
+</div></code></pre>
+<h3 id="8-tries">8. Tries</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Tries:</strong> Tree-like data structures for storing dynamic sets of strings.</li>
+</ul>
+<p><strong>Problem: Implement Trie (Prefix Tree)</strong></p>
+<ul>
+<li><strong>Background:</strong> Implement a trie with insert, search, and startsWith methods.</li>
+<li><strong>Approach:</strong> Use a nested structure with unordered_map for each node to represent characters and pointers to child nodes.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trie</span> {</span>
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TrieNode</span> {</span>
+        <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">char</span>, TrieNode*&gt; children;
+        <span class="hljs-keyword">bool</span> isEndOfWord;
+        TrieNode() : isEndOfWord(<span class="hljs-literal">false</span>) {}
+    };
+    
+    TrieNode* root;
+    
+<span class="hljs-keyword">public</span>:
+    Trie() {
+        root = <span class="hljs-keyword">new</span> TrieNode();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-built_in">string</span> word)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : word) {
+            <span class="hljs-keyword">if</span> (!node-&gt;children.count(c)) {
+                node-&gt;children[c] = <span class="hljs-keyword">new</span> TrieNode();
+            }
+            node = node-&gt;children[c];
+        }
+        node-&gt;isEndOfWord = <span class="hljs-literal">true</span>;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-built_in">string</span> word)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : word) {
+            <span class="hljs-keyword">if</span> (!node-&gt;children.count(c)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            node = node-&gt;children[c];
+        }
+        <span class="hljs-keyword">return</span> node-&gt;isEndOfWord;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(<span class="hljs-built_in">string</span> prefix)</span> </span>{
+        TrieNode* node = root;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : prefix) {
+            <span class="hljs-keyword">if</span> (!node-&gt;children.count(c)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            node = node-&gt;children[c];
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+};
+</div></code></pre>
+<h3 id="9-heaps-priority-queue">9. Heaps (Priority Queue)</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Heaps:</strong> Special tree-based data structure that satisfies the heap property.</li>
+</ul>
+<p><strong>Example: Kth Largest Element in a Stream</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KthLargest</span> {</span>
+    priority_queue&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;, greater&lt;<span class="hljs-keyword">int</span>&gt;&gt; minHeap;
+    <span class="hljs-keyword">int</span> k;
+    
+<span class="hljs-keyword">public</span>:
+    KthLargest(<span class="hljs-keyword">int</span> k, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums) : k(k) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) {
+            add(num);
+        }
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>{
+        minHeap.push(val);
+        <span class="hljs-keyword">if</span> (minHeap.size() &gt; k) {
+            minHeap.pop();
+        }
+        <span class="hljs-keyword">return</span> minHeap.top();
+    }
+};
+</div></code></pre>
+<p><strong>Problem: Top K Frequent Elements</strong></p>
+<ul>
+<li><strong>Background:</strong> Given a non-empty array of integers, return the k most frequent elements.</li>
+<li><strong>Approach:</strong> Use a min-heap to keep track of the k most frequent elements based on their frequencies.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">topKFrequent</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>{
+    <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; freq;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) {
+        freq[num]++;
+    }
+    <span class="hljs-keyword">using</span> Pair = pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;;
+    priority_queue&lt;Pair, <span class="hljs-built_in">vector</span>&lt;Pair&gt;, greater&lt;Pair&gt;&gt; minHeap;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; entry : freq) {
+        minHeap.push({entry.second, entry.first});
+        <span class="hljs-keyword">if</span> (minHeap.size() &gt; k) {
+            minHeap.pop();
+        }
+    }
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; result;
+    <span class="hljs-keyword">while</span> (!minHeap.empty()) {
+        result.push_back(minHeap.top().second);
+        minHeap.pop();
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="10-backtracking">10. Backtracking</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Backtracking:</strong> Try to build a solution incrementally and backtrack as soon as a solution fails.</li>
+</ul>
+<p><strong>Example: N-Queens</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; board, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt;&amp; solutions, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; columns, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; diag1, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; diag2)</span> </span>{
+    <span class="hljs-keyword">if</span> (row == n) {
+        solutions.push_back(board);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> col = <span class="hljs-number">0</span>; col &lt; n; col++) {
+        <span class="hljs-keyword">if</span> (columns[col] || diag1[row - col + n - <span class="hljs-number">1</span>] || diag2[row + col]) <span class="hljs-keyword">continue</span>;
+        board[row][col] = <span class="hljs-string">'Q'</span>;
+        columns[col] = diag1[row - col + n - <span class="hljs-number">1</span>] = diag2[row + col] = <span class="hljs-number">1</span>;
+        solve(row + <span class="hljs-number">1</span>, n, board, solutions, columns, diag1, diag2);
+        board[row][col] = <span class="hljs-string">'.'</span>;
+        columns[col] = diag1[row - col + n - <span class="hljs-number">1</span>] = diag2[row + col] = <span class="hljs-number">0</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; <span class="hljs-title">solveNQueens</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; solutions;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; <span class="hljs-title">board</span><span class="hljs-params">(n, <span class="hljs-built_in">string</span>(n, <span class="hljs-string">'.'</span>))</span></span>;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">columns</span><span class="hljs-params">(n, <span class="hljs-number">0</span>)</span>, <span class="hljs-title">diag1</span><span class="hljs-params">(<span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span>, <span class="hljs-title">diag2</span><span class="hljs-params">(<span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;
+    solve(<span class="hljs-number">0</span>, n, board, solutions, columns, diag1, diag2);
+    <span class="hljs-keyword">return</span> solutions;
+}
+</div></code></pre>
+<p><strong>Problem: Subsets</strong></p>
+<ul>
+<li><strong>Background:</strong> Given an integer array <code>nums</code> of unique elements, return all possible subsets (the power set).</li>
+<li><strong>Approach:</strong> Use backtracking to generate all subsets by including or excluding each element.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; result, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; subset, <span class="hljs-keyword">int</span> start)</span> </span>{
+    result.push_back(subset);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt; nums.size(); i++) {
+        subset.push_back(nums[i]);
+        backtrack(nums, result, subset, i + <span class="hljs-number">1</span>);
+        subset.pop_back();
+    }
+}
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">subsets</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; result;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; subset;
+    backtrack(nums, result, subset, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="11-graphs">11. Graphs</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Graphs:</strong> Data structures consisting of nodes (vertices) connected by edges.</li>
+<li><strong>Graph Traversal (BFS, DFS):</strong> Explore nodes and edges of a graph.</li>
+</ul>
+<p><strong>Example: Number of Islands</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bfs</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&gt;&amp; grid, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c)</span> </span>{
+    <span class="hljs-keyword">int</span> nr = grid.size();
+    <span class="hljs-keyword">int</span> nc = grid[<span class="hljs-number">0</span>].size();
+    <span class="hljs-built_in">queue</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; q;
+    q.push({r, c});
+    grid[r][c] = <span class="hljs-string">'0'</span>;  <span class="hljs-comment">// Mark the cell as visited by setting it to '0'</span>
+    <span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; directions = {{<span class="hljs-number">1</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>}, {<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>}};
+    <span class="hljs-keyword">while</span> (!q.empty()) {
+        <span class="hljs-keyword">auto</span> [x, y] = q.front();
+        q.pop();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> [dx, dy] : directions) {
+            <span class="hljs-keyword">int</span> newX = x + dx;
+            <span class="hljs-keyword">int</span> newY = y + dy;
+            <span class="hljs-keyword">if</span> (newX &gt;= <span class="hljs-number">0</span> &amp;&amp; newX &lt; nr &amp;&amp; newY &gt;= <span class="hljs-number">0</span> &amp;&amp; newY &lt; nc &amp;&amp; grid[newX][newY] == <span class="hljs-string">'1'</span>) {
+                q.push({newX, newY});
+                grid[newX][newY] = <span class="hljs-string">'0'</span>;  <span class="hljs-comment">// Mark the new cell as visited</span>
+            }
+        }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numIslands</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&gt;&amp; grid)</span> </span>{
+    <span class="hljs-keyword">if</span> (grid.empty()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> nr = grid.size();
+    <span class="hljs-keyword">int</span> nc = grid[<span class="hljs-number">0</span>].size();
+    <span class="hljs-keyword">int</span> num_islands = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> r = <span class="hljs-number">0</span>; r &lt; nr; r++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>; c &lt; nc; c++) {
+            <span class="hljs-keyword">if</span> (grid[r][c] == <span class="hljs-string">'1'</span>) {
+                num_islands++;
+                bfs(grid, r, c);
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> num_islands;
+}
+
+</div></code></pre>
+<p><strong>Problem: Course Schedule</strong></p>
+<ul>
+<li><strong>Background:</strong> There are a total of <code>numCourses</code> courses you have to take, labeled from 0 to <code>numCourses - 1</code>. Some courses have prerequisites. Given the total number of courses and a list of prerequisite pairs, return true if you can finish all courses.</li>
+<li><strong>Approach:</strong> Use topological sort (BFS) to check if there is a cycle in the graph.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-keyword">int</span> numCourses, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; prerequisites)</span> </span>{
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">adjList</span><span class="hljs-params">(numCourses)</span></span>;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">indegree</span><span class="hljs-params">(numCourses, <span class="hljs-number">0</span>)</span></span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; prereq : prerequisites) {
+        adjList[prereq[<span class="hljs-number">1</span>]].push_back(prereq[<span class="hljs-number">0</span>]);
+        indegree[prereq[<span class="hljs-number">0</span>]]++;
+    }
+
+    <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses; i++) {
+        <span class="hljs-keyword">if</span> (indegree[i] == <span class="hljs-number">0</span>) {
+            q.push(i);
+        }
+    }
+
+    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (!q.empty()) {
+        <span class="hljs-keyword">int</span> course = q.front();
+        q.pop();
+        count++;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> nextCourse : adjList[course]) {
+            <span class="hljs-keyword">if</span> (--indegree[nextCourse] == <span class="hljs-number">0</span>) {
+                q.push(nextCourse);
+            }
+        }
+    }
+
+    <span class="hljs-keyword">return</span> count == numCourses;
+}
+</div></code></pre>
+<h3 id="12-dynamic-programming-dp">12. Dynamic Programming (DP)</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Dynamic Programming:</strong> Solve problems by combining the solutions to subproblems.</li>
+</ul>
+<p><strong>Example: Climbing Stairs</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> n;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n + <span class="hljs-number">1</span>)</span></span>;
+    dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;
+    dp[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++) {
+        dp[i] = dp[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">2</span>];
+    }
+    <span class="hljs-keyword">return</span> dp[n];
+}
+</div></code></pre>
+<p><strong>Problem: Longest Increasing Subsequence</strong></p>
+<ul>
+<li><strong>Background:</strong> Given an integer array <code>nums</code>, return the length of the longest strictly increasing subsequence.</li>
+<li><strong>Approach:</strong> Use dynamic programming to keep track of the length of the longest subsequence ending at each index.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLIS</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-keyword">if</span> (nums.empty()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), <span class="hljs-number">1</span>)</span></span>;
+    <span class="hljs-keyword">int</span> maxLength = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.size(); i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) {
+            <span class="hljs-keyword">if</span> (nums[i] &gt; nums[j]) {
+                dp[i] = max(dp[i], dp[j] + <span class="hljs-number">1</span>);
+            }
+        }
+        maxLength = max(maxLength, dp[i]);
+    }
+    <span class="hljs-keyword">return</span> maxLength;
+}
+</div></code></pre>
+<h3 id="13-intervals">13. Intervals</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Intervals:</strong> Problems involving ranges or segments.</li>
+</ul>
+<p><strong>Example: Merge Intervals</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>{
+    <span class="hljs-keyword">if</span> (intervals.empty()) <span class="hljs-keyword">return</span> {};
+    sort(intervals.begin(), intervals.end());
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; merged;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; interval : intervals) {
+        <span class="hljs-keyword">if</span> (merged.empty() || merged.back()[<span class="hljs-number">1</span>] &lt; interval[<span class="hljs-number">0</span>]) {
+            merged.push_back(interval);
+        } <span class="hljs-keyword">else</span> {
+            merged.back()[<span class="hljs-number">1</span>] = max(merged.back()[<span class="hljs-number">1</span>], interval[<span class="hljs-number">1</span>]);
+        }
+    }
+    <span class="hljs-keyword">return</span> merged;
+}
+</div></code></pre>
+<p><strong>Problem: Insert Interval</strong></p>
+<ul>
+<li><strong>Background:</strong> Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).</li>
+<li><strong>Approach:</strong> Traverse the list and handle different cases of overlapping and merging.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; intervals, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; newInterval)</span> </span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; result;
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, n = intervals.size();
+    <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; intervals[i][<span class="hljs-number">1</span>] &lt; newInterval[<span class="hljs-number">0</span>]) {
+        result.push_back(intervals[i++]);
+    }
+    <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &lt;= newInterval[<span class="hljs-number">1</span>]) {
+        newInterval[<span class="hljs-number">0</span>] = min(newInterval[<span class="hljs-number">0</span>], intervals[i][<span class="hljs-number">0</span>]);
+        newInterval[<span class="hljs-number">1</span>] = max(newInterval[<span class="hljs-number">1</span>], intervals[i][<span class="hljs-number">1</span>]);
+        i++;
+    }
+    result.push_back(newInterval);
+    <span class="hljs-keyword">while</span> (i &lt; n) {
+        result.push_back(intervals[i++]);
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="14-greedy">14. Greedy</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Greedy Algorithms:</strong> Make the best choice at each step.</li>
+</ul>
+<p><strong>Example: Maximum Subarray</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-keyword">int</span> max_sum = nums[<span class="hljs-number">0</span>], current_sum = nums[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.size(); i++) {
+        current_sum = max(nums[i], current_sum + nums[i]);
+        max_sum = max(max_sum, current_sum);
+    }
+    <span class="hljs-keyword">return</span> max_sum;
+}
+</div></code></pre>
+<p><strong>Problem: Jump Game</strong></p>
+<ul>
+<li><strong>Background:</strong> Given an array of non-negative integers <code>nums</code>, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that position. Determine if you are able to reach the last index.</li>
+<li><strong>Approach:</strong> Use a greedy algorithm to keep track of the farthest index that can be reached.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">canJump</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-keyword">int</span> farthest = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) {
+        <span class="hljs-keyword">if</span> (i &gt; farthest) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        farthest = max(farthest, i + nums[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</div></code></pre>
+<h3 id="15-bit-manipulation">15. Bit Manipulation</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Bit Manipulation:</strong> Perform operations directly on binary representations.</li>
+</ul>
+<p><strong>Example: Single Number</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>{
+    <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) {
+        result ^= num;
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<p><strong>Problem: Number of 1 Bits</strong></p>
+<ul>
+<li><strong>Background:</strong> Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).</li>
+<li><strong>Approach:</strong> Use bit manipulation to count the number of '1' bits.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-keyword">uint32_t</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) {
+        count += n &amp; <span class="hljs-number">1</span>;
+        n &gt;&gt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+</div></code></pre>
+<h3 id="16-math--geometry">16. Math &amp; Geometry</h3>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><strong>Math Problems:</strong> Often involve combinatorics, probability, etc.</li>
+<li><strong>Geometry Problems:</strong> Involve shapes, distances, etc.</li>
+</ul>
+<p><strong>Example: Pow(x, n)</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">myPow</span><span class="hljs-params">(<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) {
+        x = <span class="hljs-number">1</span> / x;
+        n = -n;
+    }
+    <span class="hljs-keyword">double</span> half = myPow(x, n / <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">if</span> (n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> half * half;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> half * half * x;
+    }
+}
+</div></code></pre>
+<p><strong>Problem: Happy Number</strong></p>
+<ul>
+<li><strong>Background:</strong> Write an algorithm to determine if a number is &quot;happy&quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</li>
+<li><strong>Approach:</strong> Use a hash set to detect cycles.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_set&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sumOfSquares</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (n) {
+        <span class="hljs-keyword">int</span> digit = n % <span class="hljs-number">10</span>;
+        sum += digit * digit;
+        n /= <span class="hljs-number">10</span>;
+    }
+    <span class="hljs-keyword">return</span> sum;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isHappy</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-built_in">unordered_set</span>&lt;<span class="hljs-keyword">int</span>&gt; seen;
+    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">1</span> &amp;&amp; !seen.count(n)) {
+        seen.insert(n);
+        n = sumOfSquares(n);
+    }
+    <span class="hljs-keyword">return</span> n == <span class="hljs-number">1</span>;
+}
+</div></code></pre>
+
+</body>
+</html>
