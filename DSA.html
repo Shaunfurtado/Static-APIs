@@ -388,16 +388,15 @@ code {
 <ul>
 <li><a href="#21-binary-tree">2.1 Binary Tree</a></li>
 <li><a href="#22-balanced-trees">2.2 Balanced Trees</a></li>
-<li><a href="#23-binary-search">2.3 Binary Search</a></li>
-<li><a href="#24-depth-first-search">2.4 Depth-First Search</a></li>
-<li><a href="#25-breadth-first-search">2.5 Breadth-First Search</a></li>
+<li><a href="#23-binary-search-tree-bst">2.3 Binary Search Tree</a></li>
+<li><a href="#24-depth-first-search-dfs">2.4 Depth-First Search (DFS)</a></li>
+<li><a href="#25-breadth-first-search-bfs">2.5 Breadth-First Search (BFS)</a></li>
 </ul>
 </li>
 <li><a href="#30-np-complete-problems">3.0 NP Complete Problems</a>
 <ul>
-<li><a href="#31-np-complete">3.1 NP Complete</a></li>
-<li><a href="#32-traveling-salesman-problem">3.2 Traveling Salesman Problem</a></li>
-<li><a href="#33-knapsack-problem">3.3 Knapsack Problem</a></li>
+<li><a href="#31-travelling-salesman-problem-tsp">3.1 Travelling Salesman Problem</a></li>
+<li><a href="#32-knapsack-problem">3.2 Knapsack Problem</a></li>
 </ul>
 </li>
 <li><a href="#40-algorithms">4.0 Algorithms</a>
@@ -753,9 +752,10 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
 </div></code></pre>
 <h3 id="19-heap-stdpriorityqueue">1.9 Heap <code>std::priority_queue</code></h3>
 <p><strong>Notes:</strong> A heap is an instance of a priority queue.</p>
+<p>Sure, let's go over the Trees section in more detail with specific concepts and example code snippets for each subcategory.</p>
 <h2 id="20-trees">2.0 Trees</h2>
-<h3 id="21-binary-tree">2.1: Binary Tree</h3>
-<p>A binary tree is a tree data structure where each node has at most two children, referred to as the left child and the right child.</p>
+<h3 id="21-binary-tree">2.1 Binary Tree</h3>
+<p>A binary tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child.</p>
 <p><strong>Example Problem</strong>: Invert Binary Tree</p>
 <pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
     <span class="hljs-keyword">int</span> val;
@@ -773,8 +773,31 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
     <span class="hljs-keyword">return</span> root;
 }
 </div></code></pre>
-<h3 id="22-binary-search-tree-bst">2.2: Binary Search Tree (BST)</h3>
-<p>A binary search tree is a binary tree in which each node has at most two children and for each node, the left subtree contains only nodes with keys less than the node's key, and the right subtree contains only nodes with keys greater than the node's key.</p>
+<h3 id="22-balanced-trees">2.2 Balanced Trees</h3>
+<p>Balanced trees are binary trees that maintain their height as low as possible to ensure operations such as insertion, deletion, and lookup are efficient. Examples include AVL trees and Red-Black trees.</p>
+<p><strong>Example Problem</strong>: Check if a Binary Tree is Balanced</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">height</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> leftHeight = height(root-&gt;left);
+    <span class="hljs-keyword">int</span> rightHeight = height(root-&gt;right);
+    <span class="hljs-keyword">if</span> (leftHeight == <span class="hljs-number">-1</span> || rightHeight == <span class="hljs-number">-1</span> || <span class="hljs-built_in">abs</span>(leftHeight - rightHeight) &gt; <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">return</span> max(leftHeight, rightHeight) + <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isBalanced</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-keyword">return</span> height(root) != <span class="hljs-number">-1</span>;
+}
+</div></code></pre>
+<h3 id="23-binary-search-tree-bst">2.3 Binary Search Tree (BST)</h3>
+<p>A binary search tree is a binary tree in which each node has at most two children, and for each node, the left subtree contains only nodes with keys less than the node's key, and the right subtree contains only nodes with keys greater than the node's key.</p>
 <p><strong>Example Problem</strong>: Validate Binary Search Tree</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;limits.h&gt;</span></span>
 
@@ -795,7 +818,66 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
     <span class="hljs-keyword">return</span> validate(root, LONG_MIN, LONG_MAX);
 }
 </div></code></pre>
-<h3 id="23-tree-traversal">2.3: Tree Traversal</h3>
+<h3 id="24-depth-first-search-dfs">2.4 Depth-First Search (DFS)</h3>
+<p>Depth-First Search (DFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the root and explores as far as possible along each branch before backtracking.</p>
+<p><strong>Example Problem</strong>: Binary Tree Inorder Traversal using DFS</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(TreeNode* root, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; result)</span> </span>{
+    <span class="hljs-keyword">if</span> (root) {
+        inorder(root-&gt;left, result);
+        result.push_back(root-&gt;val);
+        inorder(root-&gt;right, result);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; result;
+    inorder(root, result);
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="25-breadth-first-search-bfs">2.5 Breadth-First Search (BFS)</h3>
+<p>Breadth-First Search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the root and explores all neighbor nodes at the present depth prior to moving on to nodes at the next depth level.</p>
+<p><strong>Example Problem</strong>: Binary Tree Level Order Traversal using BFS</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">levelOrder</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; result;
+    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">queue</span>&lt;TreeNode*&gt; q;
+    q.push(root);
+    <span class="hljs-keyword">while</span> (!q.empty()) {
+        <span class="hljs-keyword">int</span> size = q.size();
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; level;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; ++i) {
+            TreeNode* node = q.front();
+            q.pop();
+            level.push_back(node-&gt;val);
+            <span class="hljs-keyword">if</span> (node-&gt;left) q.push(node-&gt;left);
+            <span class="hljs-keyword">if</span> (node-&gt;right) q.push(node-&gt;right);
+        }
+        result.push_back(level);
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="concept-tree-traversal">Concept: Tree Traversal</h3>
 <p>Tree traversal refers to the process of visiting all the nodes in a tree in a specific order. Common traversal methods include Inorder, Preorder, and Postorder traversal.</p>
 <p><strong>Example Problem</strong>: Binary Tree Inorder Traversal</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
@@ -840,7 +922,7 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
 }
 </div></code></pre>
 <h2 id="30-np-complete-problems">3.0 NP Complete Problems</h2>
-<h3 id="concept-travelling-salesman-problem-tsp">Concept: Travelling Salesman Problem (TSP)</h3>
+<h3 id="31-travelling-salesman-problem-tsp">3.1: Travelling Salesman Problem (TSP)</h3>
 <p>The Travelling Salesman Problem (TSP) is a classic NP-complete problem that seeks to determine the shortest possible route that visits each city exactly once and returns to the origin city.</p>
 <p><strong>Example Problem</strong>: TSP using Dynamic Programming and Bitmasking</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
@@ -885,7 +967,7 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </div></code></pre>
-<h3 id="concept-knapsack-problem">Concept: Knapsack Problem</h3>
+<h3 id="32-knapsack-problem">3.2: Knapsack Problem</h3>
 <p>The Knapsack Problem is another well-known NP-complete problem. Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.</p>
 <p><strong>Example Problem</strong>: 0/1 Knapsack Problem</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
