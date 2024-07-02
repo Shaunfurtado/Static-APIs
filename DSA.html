@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>DSA.md</title>
+<title>DSA</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -754,23 +754,169 @@ p.pop(); <span class="hljs-comment">// Remove Top</span>
 <h3 id="19-heap-stdpriorityqueue">1.9 Heap <code>std::priority_queue</code></h3>
 <p><strong>Notes:</strong> A heap is an instance of a priority queue.</p>
 <h2 id="20-trees">2.0 Trees</h2>
-<h3 id="21-binary-tree">2.1 Binary Tree</h3>
-<p><strong>Use for:</strong> Ordered maps, sets, heaps, binary search trees.</p>
-<h3 id="22-balanced-trees">2.2 Balanced Trees</h3>
-<p><strong>Use for:</strong> Ensure <code>O(log(n))</code> operations. Examples: AVL Trees, Red-Black Trees.</p>
-<h3 id="23-binary-search">2.3 Binary Search</h3>
-<p><strong>Use for:</strong> Efficiently finding an element in a sorted array or tree.</p>
-<h3 id="24-depth-first-search">2.4 Depth-First Search</h3>
-<p><strong>Use for:</strong> Traversing or searching tree or graph structures.</p>
-<h3 id="25-breadth-first-search">2.5 Breadth-First Search</h3>
-<p><strong>Use for:</strong> Traversing or searching tree or graph structures.</p>
+<h3 id="21-binary-tree">2.1: Binary Tree</h3>
+<p>A binary tree is a tree data structure where each node has at most two children, referred to as the left child and the right child.</p>
+<p><strong>Example Problem</strong>: Invert Binary Tree</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    TreeNode* left = invertTree(root-&gt;left);
+    TreeNode* right = invertTree(root-&gt;right);
+    root-&gt;left = right;
+    root-&gt;right = left;
+    <span class="hljs-keyword">return</span> root;
+}
+</div></code></pre>
+<h3 id="22-binary-search-tree-bst">2.2: Binary Search Tree (BST)</h3>
+<p>A binary search tree is a binary tree in which each node has at most two children and for each node, the left subtree contains only nodes with keys less than the node's key, and the right subtree contains only nodes with keys greater than the node's key.</p>
+<p><strong>Example Problem</strong>: Validate Binary Search Tree</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;limits.h&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">validate</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">long</span> low, <span class="hljs-keyword">long</span> high)</span> </span>{
+    <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">if</span> (root-&gt;val &lt;= low || root-&gt;val &gt;= high) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">return</span> validate(root-&gt;left, low, root-&gt;val) &amp;&amp; validate(root-&gt;right, root-&gt;val, high);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValidBST</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-keyword">return</span> validate(root, LONG_MIN, LONG_MAX);
+}
+</div></code></pre>
+<h3 id="23-tree-traversal">2.3: Tree Traversal</h3>
+<p>Tree traversal refers to the process of visiting all the nodes in a tree in a specific order. Common traversal methods include Inorder, Preorder, and Postorder traversal.</p>
+<p><strong>Example Problem</strong>: Binary Tree Inorder Traversal</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(TreeNode* root, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; result)</span> </span>{
+    <span class="hljs-keyword">if</span> (root) {
+        inorder(root-&gt;left, result);
+        result.push_back(root-&gt;val);
+        inorder(root-&gt;right, result);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; result;
+    inorder(root, result);
+    <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<h3 id="concept-lowest-common-ancestor-lca">Concept: Lowest Common Ancestor (LCA)</h3>
+<p>The Lowest Common Ancestor of two nodes in a tree is the deepest node that is an ancestor of both nodes.</p>
+<p><strong>Example Problem</strong>: Lowest Common Ancestor of a Binary Tree</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span> {</span>
+    <span class="hljs-keyword">int</span> val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(<span class="hljs-keyword">int</span> x) : val(x), left(<span class="hljs-literal">NULL</span>), right(<span class="hljs-literal">NULL</span>) {}
+};
+
+<span class="hljs-function">TreeNode* <span class="hljs-title">lowestCommonAncestor</span><span class="hljs-params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{
+    <span class="hljs-keyword">if</span> (!root || root == p || root == q) <span class="hljs-keyword">return</span> root;
+    TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);
+    TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);
+    <span class="hljs-keyword">if</span> (left &amp;&amp; right) <span class="hljs-keyword">return</span> root;
+    <span class="hljs-keyword">return</span> left ? left : right;
+}
+</div></code></pre>
 <h2 id="30-np-complete-problems">3.0 NP Complete Problems</h2>
-<h3 id="31-np-complete">3.1 NP Complete</h3>
-<p><strong>Definition:</strong> Problems that can be verified in polynomial time but not necessarily solved in polynomial time.</p>
-<h3 id="32-traveling-salesman-problem">3.2 Traveling Salesman Problem</h3>
-<p><strong>Definition:</strong> Find the shortest possible route visiting each city exactly once and returning to the origin city.</p>
-<h3 id="33-knapsack-problem">3.3 Knapsack Problem</h3>
-<p><strong>Definition:</strong> Maximize the total value in the knapsack without exceeding the weight limit.</p>
+<h3 id="concept-travelling-salesman-problem-tsp">Concept: Travelling Salesman Problem (TSP)</h3>
+<p>The Travelling Salesman Problem (TSP) is a classic NP-complete problem that seeks to determine the shortest possible route that visits each city exactly once and returns to the origin city.</p>
+<p><strong>Example Problem</strong>: TSP using Dynamic Programming and Bitmasking</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">4</span>; <span class="hljs-comment">// number of cities</span>
+
+<span class="hljs-keyword">int</span> dist[N][N] = {
+    {<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">20</span>},
+    {<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">35</span>, <span class="hljs-number">25</span>},
+    {<span class="hljs-number">15</span>, <span class="hljs-number">35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>},
+    {<span class="hljs-number">20</span>, <span class="hljs-number">25</span>, <span class="hljs-number">30</span>, <span class="hljs-number">0</span>}
+};
+
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">1</span>&lt;&lt;N][N];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">tsp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> mask, <span class="hljs-keyword">int</span> pos)</span> </span>{
+    <span class="hljs-keyword">if</span> (mask == (<span class="hljs-number">1</span>&lt;&lt;N) - <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> dist[pos][<span class="hljs-number">0</span>];
+    }
+    
+    <span class="hljs-keyword">if</span> (dp[mask][pos] != <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">return</span> dp[mask][pos];
+    }
+    
+    <span class="hljs-keyword">int</span> ans = INF;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> city = <span class="hljs-number">0</span>; city &lt; N; city++) {
+        <span class="hljs-keyword">if</span> ((mask &amp; (<span class="hljs-number">1</span>&lt;&lt;city)) == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">int</span> newAns = dist[pos][city] + tsp(mask | (<span class="hljs-number">1</span>&lt;&lt;city), city);
+            ans = <span class="hljs-built_in">std</span>::min(ans, newAns);
+        }
+    }
+    
+    <span class="hljs-keyword">return</span> dp[mask][pos] = ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">std</span>::fill(&amp;dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], &amp;dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + <span class="hljs-keyword">sizeof</span>(dp)/<span class="hljs-keyword">sizeof</span>(dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]), <span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The minimum cost is: "</span> &lt;&lt; tsp(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>) &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="concept-knapsack-problem">Concept: Knapsack Problem</h3>
+<p>The Knapsack Problem is another well-known NP-complete problem. Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.</p>
+<p><strong>Example Problem</strong>: 0/1 Knapsack Problem</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">knapSack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> W, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; wt, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; val, <span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(W + <span class="hljs-number">1</span>))</span></span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> w = <span class="hljs-number">0</span>; w &lt;= W; ++w) {
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || w == <span class="hljs-number">0</span>) {
+                dp[i][w] = <span class="hljs-number">0</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (wt[i - <span class="hljs-number">1</span>] &lt;= w) {
+                dp[i][w] = <span class="hljs-built_in">std</span>::max(val[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">1</span>][w - wt[i - <span class="hljs-number">1</span>]], dp[i - <span class="hljs-number">1</span>][w]);
+            } <span class="hljs-keyword">else</span> {
+                dp[i][w] = dp[i - <span class="hljs-number">1</span>][w];
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> dp[n][W];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> W = <span class="hljs-number">50</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; wt = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>};
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; val = {<span class="hljs-number">60</span>, <span class="hljs-number">100</span>, <span class="hljs-number">120</span>};
+    <span class="hljs-keyword">int</span> n = wt.size();
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The maximum value in knapsack is: "</span> &lt;&lt; knapSack(W, wt, val, n) &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>These detailed explanations and examples should give you a solid foundation for understanding Trees and NP Complete Problems, enabling you to tackle related problems in the Neetcode 150 problem set.</p>
 <h2 id="40-algorithms">4.0 Algorithms</h2>
 <h3 id="41-insertion-sort">4.1 Insertion Sort</h3>
 <p><strong>Idea:</strong> Insert elements into their correct position in a sorted array.
